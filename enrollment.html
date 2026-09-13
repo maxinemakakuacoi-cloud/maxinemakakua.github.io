@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <title>PCU Enrollment Form</title> <style>
+        /* This is for the general body styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url("pcu.jpg"); /*This is to Custom background */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            display: flex; /* This is use as a flexbox for centering */
+            justify-content: center; /* This is to center horizontally */
+            align-items: center; /* This is to center vertically */
+            min-height: 100vh; /* this is for the full viewport height */
+            padding: 20px; /* This is to add padding for small screens */
+        }
+
+        /* This is the heading styles */
+        h2, h3 {
+            text-align: center; /* This is the center text */
+            color: #015871; 
+            margin-bottom: 5px;
+        }
+
+        /*This is the form styling */
+        form {
+            max-width: 650px;
+            width: 100%; /* This is to make the form responsive */
+            background: rgba(255, 255, 255, 0.95); /* this is fo the slight transparency */
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 100, 120, 0.2); 
+            border: 2px solid #81d4fa;
+        }
+
+        /* This is a fieldset box styling */
+        fieldset {
+            border: 2px solid #4dd0e1; /* Teal border */
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #e0f7fa; /* Light blue bg */
+        }
+
+        legend {
+            font-weight: bold;
+            color: #0077b6;
+            font-size: 16px;
+            padding: 0 10px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #014f86;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            background-color: #f0fdff;
+        }
+
+        /* This is the radio button and checkbox styling */
+        input[type="radio"] {
+            width: auto; /*This is to override full width for these */
+            margin-right: 5px;
+        }
+        
+        /* This is the submit & Reset button styles */
+        button {
+            background: #00b4d8;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            margin-right: 10px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background: #0077b6; 
+            transform: scale(1.05);
+        }
+
+        
+        #thankYouMessage {
+            display: none; /* This is for hidden until submission */
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: #d0f4ff;
+            border: 2px dashed #4dd0e1;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            color: #015871;
+            font-size: 18px;
+            box-shadow: 0 8px 15px rgba(0, 100, 120, 0.1);
+        }
+
+        #thankYouMessage strong {
+            font-size: 30px;
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form id="enrollmentForm">
+
+        <h2>PHILIPPINE CHRISTIAN UNIVERSITY</h2>
+        <h3>Student Enrollment Form</h3>
+
+        <fieldset>
+            <legend>Student Information</legend>
+
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" required>
+            
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+
+            <label for="studentId">Student ID:</label>
+            <input type="text" id="studentId" name="studentId"> <label for="course">Course:</label>
+            <input type="text" id="course" name="course" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+        </fieldset>
+
+        <fieldset>
+            <legend>Enrollment Type</legend>
+
+            <input type="radio" id="newStudent" name="enrollmentType" value="New Student" required>
+            <label for="newStudent">New Student</label><br>
+            
+            <input type="radio" id="transferStudent" name="enrollmentType" value="Transfer Student" required>
+            <label for="transferStudent">Transfer Student</label><br>
+
+            <input type="radio" id="returningStudent" name="enrollmentType" value="Returning Student" required>
+            <label for="returningStudent">Returning Student</label>
+
+            <input type="radio" id="oldStudent" name="enrollmentType" value="Old Student" required>
+            <label for="oldStudent">Old Student</label>
+        </fieldset>
+
+        <button type="submit">Submit </button>
+        <button type="reset">Reset</button>
+    </form>
+
+    <div id="thankYouMessage">
+        <strong>Thank you!</strong><br>
+        Your enrollment has been submitted successfully.<br>
+        Please wait for our email regarding your enrollment. Thank you!
+    </div>
+
+    <script>
+       
+        document.getElementById("enrollmentForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Stop default form submission (page reload)
+
+            //This is to get data from all form fields
+            const formData = {
+                fullName: document.getElementById("fullName").value,
+                age: document.getElementById("age").value,
+                studentId: document.getElementById("studentId").value,
+                course: document.getElementById("course").value,
+                email: document.getElementById("email").value,
+                enrollmentType: document.querySelector('input[name="enrollmentType"]:checked').value
+            };
+
+            document.getElementById("enrollmentForm").style.display = "none";
+            document.getElementById("thankYouMessage").style.display = "block";
+
+            
+            console.log("Form submitted:", formData);
+        });
+    </script>
+
+</body>
+</html>
